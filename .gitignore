@@ -1,0 +1,29 @@
+# Web 综合端 · Git 忽略规则（老师初始工程 + 团队文档）
+# 前端依赖与构建产物
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.local
+
+# 后端 Maven 构建产物
+target/
+*.class
+*.jar
+*.war
+
+# IDE
+.idea/
+*.iml
+.vs/
+*.user
+*.suo
+
+# 日志与运行产物
+logs/
+*.log
+logs.txt
+
+# 其他
+.DS_Store
+Thumbs.db

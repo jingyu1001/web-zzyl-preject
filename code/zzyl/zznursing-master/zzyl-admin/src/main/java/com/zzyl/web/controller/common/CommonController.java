@@ -83,13 +83,8 @@ public class CommonController
     {
         try
         {
-            // 上传文件路径
-            //String filePath = RuoYiConfig.getUploadPath();
-            // 上传并返回新文件名称
-            //String fileName = FileUploadUtils.upload(filePath, file);
-            //String url = serverConfig.getUrl() + fileName;
-            //上传文件到阿里云服务器，并返回服务器所在的图片地址
-            String url = aliOssUtil.upload(file.getOriginalFilename(),file.getInputStream());
+            // 优先上传到阿里云 OSS；未配置密钥或 OSS 上传异常时，回退到本地存储
+            String url = uploadToOssOrLocal(file);
 
             AjaxResult ajax = AjaxResult.success();
             ajax.put("url", url);
@@ -100,8 +95,39 @@ public class CommonController
         }
         catch (Exception e)
         {
+            log.error("上传文件失败", e);
             return AjaxResult.error(e.getMessage());
         }
+    }
+
+    /**
+     * 上传文件：优先阿里云 OSS，OSS 不可用时本地存储兜底（/profile/** 已映射到本地上传目录）
+     *
+     * @param file 上传文件
+     * @return 文件完整访问地址
+     */
+    private String uploadToOssOrLocal(MultipartFile file) throws Exception
+    {
+        boolean ossConfigured = StringUtils.isNotEmpty(aliOssUtil.getKey()) && StringUtils.isNotEmpty(aliOssUtil.getSecret());
+        if (ossConfigured)
+        {
+            try
+            {
+                // 上传文件到阿里云服务器，并返回服务器所在的图片地址
+                return aliOssUtil.upload(file.getOriginalFilename(), file.getInputStream());
+            }
+            catch (Exception e)
+            {
+                log.warn("阿里云 OSS 上传失败（{}），回退本地存储", e.getMessage());
+            }
+        }
+        else
+        {
+            log.warn("未配置阿里云 OSS 密钥（OSS_ACCESS_KEY_ID/OSS_ACCESS_KEY_SECRET），本次上传使用本地存储兜底");
+        }
+        // 本地存储：返回 /profile/upload/yyyy/MM/dd/xxx.png，再由 /profile/** 静态资源映射对外提供访问
+        String fileName = FileUploadUtils.upload(RuoYiConfig.getUploadPath(), file);
+        return serverConfig.getUrl() + fileName;
     }
 
     /**

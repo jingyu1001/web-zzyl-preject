@@ -35,6 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="nursingRequirement != null  and nursingRequirement != ''"> and nursing_requirement = #{nursingRequirement}</if>
             <if test="status != null "> and status = #{status}</if>
         </where>
+        order by order_no asc, id asc
     </select>
     
     <select id="selectNursingProjectById" parameterType="Long" resultMap="NursingProjectResult">

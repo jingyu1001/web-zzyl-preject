@@ -177,7 +177,7 @@
 
 | # | 候选模块/缺口 | 类型 | 现状 | 依赖/前置 |
 |---|---|---|---|---|
-| C-01 | 护理等级（M6） | 缺 Service/Controller | `NursingLevelMapper` 接口 + XML + domain + VO 已存在；缺 Service/Controller（本轮只做护理项目） | 无；可仿护理项目实现 |
+| C-01 | 护理等级（M6） | 已排期 | `NursingLevelMapper` 接口/XML/domain/VO 已存在（XML 已有 planName join）；**晚场 Task-S5c-01 已 review PASS + 验收 PASS（A1–A14，API 45/45、UI 36/36，88/88），可交付 lead；见 `Web_Sprint5c_护理等级CRUD_任务单.md` §11/§12** | 无；计划模块已实现 |
 | C-02 | 护理计划（M5） | 缺 Controller/Service | 页面/弹窗完整；`NursingProjectPlanMapper` 与两个 XML 已存在；缺 `NursingPlanMapper` 接口/Service/Controller | 依赖护理项目 `/all`（已上线）；**下午场 Task-S5b-01 已 review PASS + tester 验收 PASS（A1–A15，API 48/48、UI 36/36，91/91），可交付 lead；见 `Web_Sprint5b_护理计划CRUD_任务单.md` §10/§11** |
 | C-03 | 任务安排（照护安排） | 缺路由/菜单/后端 | 前端 `views/nursing/arrange/*` 代码存在但无菜单/路由；后端任务 Controller 缺失 | 护理计划/项目数据 |
 | C-04 | 健康评估 | 缺 Controller/表/菜单 | 前端 `healthAssessment` 页无菜单/路由；后端无 Controller；库无对应表 | 需老师补表/接口 |
@@ -242,4 +242,14 @@
 - **lead 独立只读复核**（15:18）：list total=3/rows=3（133/134/135，count 各 1）、planName=1号→1、status=1→2/status=0→1、详情 133 projectPlans=2、/all=3 条实体（133/134/135）、前端源码 git 零改动、DB 3/6 行且 ZZT5B 残留 0 → **全部通过**。
 - **结论：✅ 验收通过，可交付**。详细记录 `docs/test/Web_Sprint5b_验收复核.md`。
 - 已归档差异/遗留：create_by 可 NULL（R2 lead 决策，不改表）；status 字典 1/2 vs 库 0/1（O-1）；查看标题复用与 CSS 灰置（O-2，前端零改动约束内不修）；子表 plan_id 无索引/外键（R3）；护理等级 Controller 缺失列 Sprint 6 候选 C-01。
+- 提交：lead 统一 commit + push（后端 5 项 + 文档）。
+
+---
+
+## 11. Sprint 5c 最终验收记录（lead，2026-11-25 22:38）
+
+- **web-tester 终版（v1.0）**：88 用例 = 88 PASS（静态 7 + API 45 + UI 36），**FAIL 0、P1/P2 缺陷 0** → 通过。
+- **lead 独立只读复核**（22:36）：list total=3/rows=3（id 76/77/78，planName 1号/2号/3号护理计划，fee 1500/2000/3000）、name/status 搜索正确、详情 76 字段完整、/all 3 条实体、前端源码 git 零改动、四表 3/3/6/1 且 ZZT5C 残留 0、8080 PID 31708 / 88 PID 35760 未动 → **全部通过**。
+- **结论：✅ 验收通过，可交付**。详见 docs/test/Web_Sprint5c_验收复核.md。
+- 遗留（非阻塞）：fee 负值未拦截（P3，Sprint 6 可选）；detail//all 实体无 planName（按 arch 口径，前端无影响）；check_in_config.nursing_level_name 历史快照；导出按范围不做。
 - 提交：lead 统一 commit + push（后端 5 项 + 文档）。

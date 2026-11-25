@@ -2,7 +2,7 @@
 
 > **调度对象**：Web 团队共享环境 —— 前端 88 / 后端 8080 / 浏览器自动化 / MySQL 写。
 > 只对上述排他资源排队；构建、静态检查、只读分析免申请（例外：后端编译会触发 devtools 热重启，需轻量报备）。
-> **调度员**：web-control（Web 调试子控制中心）｜**日志建立**：2026-11-25 08:47｜**最后更新**：2026-11-25 15:18（**第 2 时段测试已收尾**：Sprint 5b 护理计划；DQ-0004/0005/0006 全部释放；W1 API **48/48** + W2 UI **36/36** PASS；违规 0）
+> **调度员**：web-control（Web 调试子控制中心）｜**日志建立**：2026-11-25 08:47｜**最后更新**：2026-11-25 22:36（**第 3 时段测试已收尾**：Sprint 5c 护理等级；DQ-0007/0008/0009 全部释放；W1 API **45/45** + W2 UI **36/36** PASS；违规 0）
 > **配套规则**：`docs/tasks/Web调试调度规则.md`（v1.1，完整协议）｜与 C++ 端 cpp-control 协议对齐。
 
 ---
@@ -20,21 +20,21 @@
 
 ---
 
-## 二、当前状态（2026-11-25 09:05 · **Sprint 5 调度进行中**）
+## 二、当前状态（2026-11-25 22:25 · **第 3 时段（晚场）· Sprint 5c 护理等级**）
 
-- **调度状态**：值守中 —— **第 2 时段（下午场）已恢复调度**；任务：**「护理计划」模块 CRUD 后端**（**前端零改动**），web-arch 出任务单 → web-dev1 实现 → web-tester 验收
-- **公告状态**：✅ 14:55 已向 web-arch / web-dev1 / web-dev2 / web-dev3 / web-tester 发下午场调度公告（规则 v1.1 + 本时段资源口径 + 基线）
-- **上午场尾账**：编译 #1/#2 已闭环；DQ-0001/0002/0003 全部释放；V-01 已记录（09:25:38 IDEA 增量编译未报备 → devtools 重启 9s，窗口外无影响）
-- **下午场资源预期**：① dev1 编译 = 轻量报备；② dev1 自测 MySQL 写（`nursing_plan` / `nursing_project_plan` 测试数据，**基线 3/6 行**，结束清理恢复）；③ tester 浏览器自动化（**分段批准**，连续测试优先续批）+ 可能 MySQL 写；DQ 编号续 **DQ-20261125-0004** 起
-- **当前占用（DQ）**：**无** —— DQ-20261125-0006（tester W2）已于 **15:18 释放闭环**（UI 36/36 PASS，校验和与基线一致）；**第 2 时段 DQ-0004/0005/0006 全部关闭**
+- **调度状态**：值守中 —— **第 3 时段（晚场）已恢复调度**；任务：**「护理等级」模块 CRUD 后端**（**前端零改动**），web-arch 任务单 → web-dev1 实现 → web-tester 验收
+- **公告状态**：✅ 22:26 已向 web-arch / web-dev1 / web-dev2 / web-dev3 / web-tester 发晚场调度公告（规则 v1.1 + 本时段资源口径 + 基线）
+- **前两时段尾账**：第 1 时段 DQ-0001/0002/0003、第 2 时段 DQ-0004/0005/0006 全部释放闭环；V-01 在案（上午 IDEA 增量编译未报备）
+- **本时段资源预期**：① dev1 编译 = 轻量报备（8080 为用户 IDEA 实例，编译后 devtools 热重启属报备项）；② dev1/tester MySQL 写窗口各 1–2 段（仅 `ZZT5C-*` 测试行，结束恢复 **3/3/6 行**）；③ tester 浏览器窗口 W2（**分段批准、优先续批不打断**）；DQ 编号续 **DQ-20261125-0007** 起
+- **当前占用（DQ）**：**无** —— DQ-20261125-0009（tester W2）已于 **22:36 释放闭环**（UI 36/36 PASS，CHECKSUM 与基线一致）；**第 3 时段 DQ-0007/0008/0009 全部关闭**
 - **排队队列**：**0 人**（tester 连续测试结束，已恢复普通 FIFO）
-- **前端 88**：运行中 —— `node.exe`（vite.js）PID **35760**（与上午一致）；**本时段不需重启**（前端零改动）；默认不动
-- **后端 8080**：运行中 —— `java.exe`（`com.zzyl.RuoYiApplication`，IDEA 启动）PID **23192**（W2 期间 PID 未变；**09:25:38 IDEA 增量编译触发 devtools 自动重启，09:26:01 已恢复**，见 V-01）；**主动重启须申请，且不得停/重启此主人 IDEA 实例除非 lead 批准**
-- **MySQL 3306**：运行中 —— `mysqld.exe` PID **16152**；写窗口已释放（W2 核验 `nursing_plan=3` / `nursing_project_plan=6`、`ZZT5B` 残留 0、CHECKSUM 与基线一致）
+- **前端 88**：运行中 —— `node.exe`（vite.js）PID **35760**（与白天一致）；**本时段不需重启**（前端零改动）；默认不动
+- **后端 8080**：运行中 —— `java.exe`（`com.zzyl.RuoYiApplication`，**用户 IDEA 实例**）**PID 31708**，启动 **2026-11-25 16:49:39**（16:49 用户重启后新实例；含 devtools）；**不得擅动；编译后 devtools 热重启须轻量报备；主动重启须申请且禁停本实例除非 lead 批准**
+- **MySQL 3306**：运行中 —— `mysqld.exe` PID **16152**；写窗口已释放（W2 核验 `nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6` / `check_in_config=1`、CHECKSUM 与基线一致）
 - **Redis 6379**：运行中 —— `redis-server.exe` PID **35808**；默认不动
-- **浏览器自动化**：**空闲** —— W2 结束核验：msedgedriver 0 / headless Edge 0 / 自动化 node 0（msedge 常规 16 = 基线，主人/DSH 窗口）
-- **下午场基线核查（14:53，只读）**：88→**35760** / 8080→**23192** / 3306→**16152** / 6379→**35808**，**四端口 PID 与上午基线完全一致**；浏览器自动化 **0 进程**（msedge 18 个常规窗口，主人/DSH 使用，非自动化）；MySQL `nursing_plan=**3**` / `nursing_project_plan=**6**` / `nursing_project=**9**`（与 lead 交底一致）
-- **下一动作**：第 2 时段测试已收尾（摘要见 §七.2）；等 lead / web-arch 后续指令与新申请；空闲不高频汇报
+- **浏览器自动化**：**空闲** —— W2 结束核验：msedgedriver 0 / headless Edge 0 / 自动化 node 0（msedge 常规 22 = 用户窗口）
+- **晚场基线核查（22:25，只读）**：88→**35760**（不变）/ 8080→**31708**（**16:49:39 用户重启的新实例**，RuoYiApplication + devtools）/ 3306→**16152** / 6379→**35808**；MySQL `nursing_level=3`（ids **76/77/78**，plan_id **133/134/135**，fee **1500/2000/3000**）、`nursing_plan=3`、`nursing_project_plan=6`；`CHECKSUM TABLE` = **586424728 / 2521898468 / 2554906448**（与 lead 交底一致）
+- **下一动作**：第 3 时段测试已收尾（摘要见 §七 第 3 时段）；等 lead / web-arch 后续指令与新申请；空闲不高频汇报
 
 ---
 
@@ -117,11 +117,13 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 | 08:58–08:59 | web-dev1 | **编译 #1**：护理项目 CRUD 后端代码写完（4 个新 Java 文件 + `NursingProjectMapper.xml` 补 order by）→ `mvn -DskipTests compile` | 后端 8080（devtools 热重启） | **实测 BUILD SUCCESS，总耗时 1:08，10 个模块全 SUCCESS**（zzyl-nursing-platform 131 源文件无错误）；devtools 重启 08:59:29 起、08:59:44 Started，**8080 实际中断 ≈15s**；PID 23192 未变；8080/35729/60930 已恢复 LISTEN；`sys-error.log` 无本次新增错误 | ✅ 完成（09:00 核查通过） |
 | 09:00–09:02 | web-dev1 | **编译 #2**：`CommonController.java` 的 `/common/upload` 加「OSS 优先 + 本地兜底」（`/common/uploads` 未动，lead/web-arch 决策）→ `mvn -DskipTests compile` | 后端 8080（devtools 热重启） | **实测 BUILD SUCCESS 1:08，10 模块全 SUCCESS**（zzyl-admin 重编 24 源文件，含 CommonController）；devtools 重启至 **09:02:00**（`Started in 11.389s`），**8080 中断 ≈11s** 后恢复；PID 23192 未变；35729 恢复；`sys-error.log` 无新增错误 | ✅ 完成（09:02 核查通过） |
 | 14:58–14:59 | web-dev1 | **编译 #3（下午场 Sprint 5b）**：护理计划 CRUD 后端代码写完（4 个新 Java 文件 + `NursingPlanMapper.xml` 补 count 映射 / list 子查询与排序）→ `mvn -DskipTests compile` | 后端 8080（devtools 热重启） | **实测 BUILD SUCCESS 53.7s，10 模块全 SUCCESS**（zzyl-nursing-platform 含 4 个新护理计划类，无错误）。devtools 触发**双重重启**：第 1 次 **14:59:06 启动失败**（编译中间态 class 缺失 → `NursingProjectMapper` bean 不可用，`Application run failed`）、第 2 次 **14:59:22 成功**（`Started in 14.32s`）；8080 中断约 **16s**（14:59:06–14:59:22，因双重启略超 3–15s 常态，**自愈、无人工干预**）；PID **23192 未变**；14:59:45 复测 `GET /captchaImage` **HTTP 200**、14:59 后无新增 error | ✅ 完成（备注：编译期 devtools 双重启竞态自愈，属已知风险、非违规） |
+| 22:27–22:30 | web-dev1 | **编译 #4（晚场 Sprint 5c）**：护理等级 CRUD 后端（3 个新 Java 文件：`INursingLevelService` / `NursingLevelServiceImpl` / `NursingLevelController`；`NursingLevelMapper.java` 补 5 个方法声明、XML `selectNursingLevelVoList` 补 `order by nl.id asc`；第 2 轮按 arch 任务单 v0.2 补 XML `id` 过滤 + Service planId/description 校验）→ `mvn -DskipTests compile` ×2 | 后端 8080（devtools 热重启 ×2） | **两轮均 BUILD SUCCESS：第 1 轮 35.7s、第 2 轮 35.5s**（10 模块全 SUCCESS，无编译错误）；devtools 重启 **22:27:57 `Started in 11.813s`**、**22:29:29 `Started in 12.938s`**；8080 LISTEN + HTTP 200、**PID 31708 全程未动**、`sys-error` 无新增、mvn 0 | ✅ 完成（两轮均正常自愈，无需人工干预） |
 
 **核查记录**：
 - 编译 #1 前基线（08:58）：8080 LISTEN，PID 23192，启动时间 2026-11-24 14:33:30 未变；无 DQ 占用、无排队 → 不打断任何窗口。结束后（09:00）：8080/35729/60930 恢复，`Started RuoYiApplication in 16.062 seconds`，`sys-error.log` mtime 仍 08:44:05（无新增）。
 - 编译 #2 前基线（09:00:49）：8080 LISTEN 正常、PID 23192 未变、唯一 RuoYi 实例、mvn 进程 0。结束后（09:02）：8080/35729 恢复，`Started in 11.389s`，`sys-error.log` 仍无新增错误。
 - 说明：两次 devtools 热重启均**未改变 JVM PID（23192）**，属同进程内 ApplicationContext 重启，符合轻量报备预期，无异常。
+- **晚场编译 #4 进展**：第 1 轮 BUILD SUCCESS **35.7s**、10 模块全 SUCCESS，devtools 重启后 **22:27:57 `Started in 11.813s`**、PID **31708** 未变、无新增 error；因 arch 任务单到达，dev1 补 2 处小改动（XML `selectNursingLevelVoList` 增加 `id` 过滤条件；Service 校验补 planId 存在性 / description 必填）后**第 2 轮编译进行中**（预计 <1 分钟，结束统一报备）。
 
 ### 3.9 第 2 时段（下午场 · Sprint 5b「护理计划」CRUD）开记（2026-11-25 14:53 起）
 
@@ -130,6 +132,14 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 - **14:55** 向 web-arch / web-dev1 / web-dev2 / web-dev3 / web-tester 发**第 2 时段调度公告**（规则 v1.1 + 资源口径 + 基线 + DQ 续号 + 上午 V-01 提醒）。
 - **14:55** tester 回执（登记）：① 上午 `/nursing/plan/all` 404 结论为**预期 Known Issue** —— `NursingPlanController` 缺失，属 Sprint 5b 待实现 R4，**非 Sprint 5a 缺陷**；09:24:47 那条是 REG-06 访问 plan/level 页时页面自身请求的应用行为；已写入 `docs/test/Web_Sprint5_护理项目_测试报告.md` §6.3；② V-01 与 tester 无关（09:25 已释放，窗口外事件，5a 报告未提及、无冲突）；③ 5a 报告/证据已归档 `docs/test/Web_Sprint5_护理项目_测试报告.md`、`artifacts/test_web_s5/`；④ **下午 Sprint 5b 计划**：等 arch 任务单 + dev1 完成 + review PASS 后按模板申请 **W1（API+MySQL 写）** 与 **W2（浏览器+MySQL 写）**，会提前告知；预计仍需 **Redis 只读 `GET captcha_codes`**（同上午口径，已预报备）。
 - **调度口径**：维持 FIFO +「同资源同刻仅 1 人」；tester **分段批准（每段 ≤15 分钟）+ 段间优先续批**（lead 上午授权延续）；MySQL 写须基线/影响行数/回滚 + 结束核对；**后端编译须轻量报备**（吸取 V-01 教训）。
+
+### 3.10 第 3 时段（晚场 · Sprint 5c「护理等级」CRUD）开记（2026-11-25 22:25 起）
+
+- **22:25** lead 通知：**晚场任务开工** —— 实现「护理等级」模块 CRUD **后端**（**前端零改动**）；web-arch 任务单 → web-dev1 实现 → web-tester 验收；web-control 恢复值守。预计资源：① dev1 编译轻量报备 1 次；② dev1/tester MySQL 写窗口各 1–2 段（仅 `ZZT5C-*` 测试行，结束恢复 **3/3/6 行**）；③ tester 浏览器窗口 W2（分段批准、优先续批不打断）；DQ 编号续 **DQ-20261125-0007** 起。
+- **22:25 晚场基线核查（只读）**：88→**35760**（自 11-24 08:35:48 起未变）、8080→**31708**（**2026-11-25 16:49:39 用户重启的新 IDEA 实例**，RuoYiApplication + devtools，与 lead 交底一致）、3306→**16152**、6379→**35808**；浏览器自动化 **0**（msedgedriver 0；msedge 19 个常规窗口属主人/DSH，非自动化）；mvn 0、RuoYi 实例 1。
+- **22:25 MySQL 晚场基线**：`nursing_level=**3**`（ids **76/77/78**，plan_id **133/134/135**，fee **1500.00 / 2000.00 / 3000.00**）、`nursing_plan=**3**`、`nursing_project_plan=**6**`；`CHECKSUM TABLE` = `nursing_level` **586424728**、`nursing_plan` **2521898468**、`nursing_project_plan` **2554906448**（plan/project_plan 校验和与白天基线一致 = 期间未被改动）。
+- **22:26** 向 web-arch / web-dev1 / web-dev2 / web-dev3 / web-tester 发**晚场调度公告**（规则 v1.1 + 本时段资源口径 + 基线 + DQ 续号 + 用户 IDEA 实例禁动提醒）。
+- **口径**：FIFO +「同资源同刻仅 1 人」；tester 分段批准（≤15 分钟）+ 段间优先续批；MySQL 写须基线/影响行数/回滚 + 结束核对恢复 **3/3/6** 行；**8080 用户 IDEA 实例（PID 31708）不得擅动**，编译后 devtools 热重启属轻量报备。
 
 ---
 
@@ -143,6 +153,9 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 | **DQ-20261125-0004** | web-dev1 | MySQL 写（`zzyl.nursing_plan` + `zzyl.nursing_project_plan`） | Task-S5b-01 护理计划 CRUD 自测：新增计划+子表 → 整表单修改（子表替换）→ 启停部分更新 → 删除清理 → 名称唯一/子表校验事务回滚验证 | 2026-11-25 14:59 | 2026-11-25 15:00 | 2026-11-25 15:10 | **2026-11-25 15:01** | **已释放（完成，提前释放，未超时）** | 实际窗口 15:00:00–15:00:35（约 35s，提前释放）。**申报实际影响**：`nursing_plan` INSERT 1（id=141）/ UPDATE 3 次 3 行（整表单 1、启停 1→0 1、恢复 1）/ DELETE 1（id=141）；`nursing_project_plan` INSERT 3（1752/1753 + 重建 1）/ DELETE 3；重名 / 子表非法 / 被引用拦截均 **0 行落库**；A8「启停种子 133」**按口径未执行**（种子只做只读拦截验证）。**web-control 独立核验（15:01，只读）**：`nursing_plan=3`、`nursing_project_plan=6` ✅；`plan_name LIKE 'ZZT5b%'` 残留 **0** ✅；主表 ids **133/134/135**、子表 ids 与基线完全一致（**1736/1737/1739/1740/1741/1743**）、id=141 不存在 ✅；**`CHECKSUM TABLE` = 2521898468 / 2554906448 与基线完全一致** ✅；8080 PID 23192 未动、HTTP 200、RuoYi 1、mvn 0 ✅。副作用 `sys_logininfor` 1 / `sys_oper_log` 若干（应用行为，记录备查、不计违规）；无残留进程。 |
 | **DQ-20261125-0005** | web-tester | 后端 8080 稳定访问 + MySQL 写（`zzyl.nursing_plan` + `zzyl.nursing_project_plan`） | Sprint 5b 护理计划验收 **W1（API 层 A1–A15）**：列表/count/排序、搜索/分页、详情含 projectPlans、新增主+子事务、名称唯一、子表校验回滚、整表单修改（子表替换）、启停部分更新、删除级联、`/all`、**A8 被引用强制校验**、admin 权限、审计、安全 | 2026-11-25 15:02 | 2026-11-25 15:03 | **2026-11-25 15:13** | **2026-11-25 15:06** | **已释放（完成，提前释放，API 48/48 PASS）** | arch review PASS（15:15 前通报）后按 FIFO 优先批（队列 0 → 默认 10 分钟）。**基线（web-control 15:02 复核）**：`nursing_plan=3`（133/134/135）、`nursing_project_plan=6`；`CHECKSUM TABLE` = **2521898468 / 2554906448**；**种子 133 快照：status=1、update_time=NULL、create_time=2024-08-19 19:17:31**（用于 A8 恢复核验）。要求：仅 `ZZT5B-*` 测试行（plan INSERT ≤5 / UPDATE ≤6 / DELETE ≤5；project_plan INSERT ≤10 / DELETE ≤10，均净增 0）；种子 133/134/135 只读，**唯一例外 A8**：种子 133 status 临时 1→0→1、整表单改/删应被拒，验后按开测前快照 SQL 恢复 `status/update_time`（须在释放中回报快照与恢复证据）；不触碰表结构/配置/其它表；**不重启、不动 8080 PID 23192 / 88 PID 35760**；测试前先探测 8080 已加载新 Controller；产物 `artifacts/test_web_s5b/api/`；结束核对 counts **3/6**、`ZZT5B` 残留 0、**校验和与基线一致**、种子 133 status/update_time 已恢复；`sys_logininfor`/`sys_oper_log` 记录备查。W1 释放后 tester 立即申请 W2（浏览器+8080 只读+MySQL 写 15 分钟），队列空闲按段间优先授权**立即续批**；Redis 只读 `GET captcha_codes` 预报备沿用。**申报实际影响**：`nursing_plan` INSERT 2 / UPDATE 6（含 A8 种子 133 启停 2 次）/ DELETE 2，净增 0；`nursing_project_plan` INSERT 5 / DELETE 5，净增 0。**web-control 独立核验（15:06，只读）**：`nursing_plan=3` / `nursing_project_plan=6` ✅；`ZZT5B` 残留 **0** ✅；**种子 133 `status=1、update_time=NULL`（与开测快照一致）** ✅；`ORPHAN_PP=0`、子表 ids 与基线一致 ✅；**`CHECKSUM TABLE` 2521898468 / 2554906448 与基线完全一致** ✅；产物 `artifacts/test_web_s5b/api/` 18 文件 ✅；8080 PID 23192 未动 + HTTP 200、msedgedriver 0、mvn 0 ✅；副作用 `sys_logininfor`/`sys_oper_log` 记录备查、不计违规。 |
 | **DQ-20261125-0006** | web-tester | 浏览器自动化（无头 Edge）+ 8080 只读 + MySQL 写（`nursing_plan` + `nursing_project_plan`，仅 `ZZT5B-*` ≤3 行） | Sprint 5b 护理计划 **W2 UI 浏览器验收**：A13 列表 3 行/5 列/count 灰置、搜索、1000px 弹窗+子表增删行/重复校验、新增 count=0 计划、修改回填+子表替换、查看只读、启停、删除、护理等级页 /all 下拉、护理项目/房型/用户回归 + 截图 | 2026-11-25 15:05 | 2026-11-25 15:06 | **2026-11-25 15:21** | **2026-11-25 15:18** | **已释放（完成，提前释放，UI 36/36 PASS）** | 按 lead 授权 W1 释放后队列 0 → **立即续批（段间优先，不打断 tester）**。资源基线：浏览器自动化 **0**（msedgedriver 0；msedge 常规 16 个属主人/DSH，非自动化）、8080 PID 23192 **只读**、MySQL 写空闲；MySQL 仅 `ZZT5B-*` ≤3 行、结束清理回 **3/6**、种子只读（本段不做 A8 类修改）；**不重启、不动 23192/35760**；结束须清理无头 Edge/驱动进程并回填影响行数 + 截图产物；Redis 只读 `GET captcha_codes` 沿用同意。**申报实际影响**：`nursing_plan` INSERT 1 / UPDATE 3 / DELETE 1，净增 0；`nursing_project_plan` INSERT 3 / DELETE 3，净增 0；**本段未修改种子**（种子 133 保持 status=1、update_time=NULL）。**web-control 独立核验（15:18，只读）**：`nursing_plan=3` / `nursing_project_plan=6` ✅；`ZZT5B` 残留 **0** ✅；孤儿子表 **0** ✅；**种子 133 未变（status=1/update_time=NULL）** ✅；**`CHECKSUM TABLE` 2521898468 / 2554906448 与基线完全一致** ✅；UI 产物 `artifacts/test_web_s5b/ui/` **55 文件含 51 张截图** ✅；浏览器残留 **msedgedriver 0 / headless Edge 0 / 自动化 node 0**、msedge 常规 16 = 基线 ✅；8080 PID **23192**（HTTP 200）/ 88 PID **35760** 未变、mvn 0 ✅。Redis 只读 `GET captcha_codes` **1 次**（15:15:28，只读不写不删，免申请）；副作用 sys_* 记录备查、不计违规。**W1+W2 合计 A1–A15 全过（API 48/48 + UI 36/36）**。 |
+| **DQ-20261125-0007** | web-dev1 | MySQL 写（`zzyl.nursing_level` **仅此表**，其它表只读） | Task-S5c-01 护理等级 CRUD 自测：新增→详情→整表单修改→启停部分更新→唯一名冲突→非法 planId→删除；含「删除被入住配置引用的 77 应被拒」验证 | 2026-11-25 22:29 | 2026-11-25 22:30 | **2026-11-25 22:40** | **2026-11-25 22:31** | **已释放（完成，提前释放，未超时）** | 队列 0、MySQL 写空闲 → 按默认 10 分钟批准（申请人预计 8 分钟）。**写前基线（22:29 复核）**：`nursing_level=3`（ids **76/77/78**，plan_id 133/134/135，fee 1500/2000/3000，status=1）、`nursing_plan=3`、`nursing_project_plan=6`；`CHECKSUM TABLE` = **586424728 / 2521898468 / 2554906448**；`ZZT5C` 残留 0。要求：仅 `ZZT5C-dev1-*` 测试行；种子 76/77/78 只读（含 DELETE 77 应被拒的只读式验证）；其它表只读；按实际 id 清理；结束核对 counts **3/3/6**、`ZZT5C` 残留 **0**、**CHECKSUM 与基线一致**、回填实际影响行数（预计 INSERT 1 / UPDATE 3 / DELETE 1）；**不重启、不动用户 IDEA 实例 PID 31708 / 88 PID 35760**；`sys_logininfor`/`sys_oper_log` 记录备查。**申报实际影响**：`nursing_level` INSERT 1（id=79）/ UPDATE 3（整表单 1、启停 1→0 1、恢复 0→1 1）/ DELETE 1（id=79），净增 0；重名/非法 planId/缺 description/删除被引用 77 均 **0 行落库或变更**。**web-control 独立核验（22:30，只读）**：`nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6` ✅；`ZZT5C` 残留 **0** ✅；id=79 不存在 ✅；种子 76/77/78 未变（plan_id 133/134/135、fee 1500/2000/3000、status=1）✅；**`CHECKSUM TABLE` 586424728 / 2521898468 / 2554906448 与基线完全一致** ✅；8080 PID 31708 未动 + HTTP 200、88 PID 35760、mvn 0 ✅；副作用 sys_* 记录备查、不计违规。 |
+| **DQ-20261125-0008** | web-tester | 后端 8080 稳定访问 + MySQL 写（`zzyl.nursing_level` **仅此表**；`nursing_plan`/`nursing_project_plan`/`check_in_config` 只读） | Sprint 5c 护理等级验收 **W1（API 层 A1–A14）**：列表（Vo 含 planName / id asc）、搜索/分页、详情、新增（校验/唯一名/planId 存在性/D2 禁用计划/R2 审计）、整表单修改、启停部分更新、删除级联校验、**A10 验种子 77 被 check_in_config 引用→应友好拒绝**、`/all` 形状、admin 权限、审计、安全 | 2026-11-25 22:31 | 2026-11-25 22:32 | **2026-11-25 22:42** | **2026-11-25 22:34** | **已释放（完成，提前释放，API 45/45 PASS）** | arch review PASS（22:32）后按 FIFO 优先批（队列 0 → 默认 10 分钟）。**写前基线（22:31 复核）**：`nursing_level=3`（ids 76/77/78）、`nursing_plan=3`、`nursing_project_plan=6`、`check_in_config=1`（引用 77）；**种子 77 快照：plan_id=134、fee=2000.00、status=1、description 非空、create_time=2024-08-20 11:18:21、update_time=2026-03-04 15:08:57**；`CHECKSUM TABLE` = **586424728 / 2521898468 / 2554906448 / 680483255（check_in_config）**；`ZZT5C` 残留 0。要求：仅 `ZZT5C-*` 行（INSERT ≤4 / UPDATE ≤6 / DELETE ≤4，净增 0）；种子 76/77/78 只读（**A10 删 77 预期被拒、执行前快照落盘；若误删按快照立即恢复并记 P1**）；plan/project_plan/check_in_config 只读 0 变更；结束核对三表 **3/3/6**、`ZZT5C` 残留 **0**、**CHECKSUM 与基线一致（含 check_in_config 680483255）**、种子 77 完整、回填实际影响行数；**不重启、不动用户 IDEA 实例 PID 31708 / 88 PID 35760**；`sys_logininfor`/`sys_oper_log` 记录备查。W1 释放后 tester 立即申请 W2（浏览器 + 8080 只读 + MySQL 写 15 分钟），队列空闲按段间优先授权**立即续批**；Redis 只读预报备沿用。**申报实际影响**：`nursing_level` INSERT **5** / UPDATE 4 / DELETE 5（净增 0；较申报 INSERT ≤4 **多 1 行**为 ADD-04「负费用观察」用例建档，均为 `ZZT5C-*` 且已清理——轻微超出申报上限 1 行，记录备查、**不计违规**，已提示 tester 后续按实际用例数申报上限）；`nursing_plan`/`nursing_project_plan`/`check_in_config` **0 变更**。**web-control 独立核验（22:34，只读）**：`nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6` / `check_in_config=1` ✅；`ZZT5C` 残留 **0** ✅；种子 ids 76/77/78、种子 77（plan_id=134、fee=2000.00、status=1、update_time=2026-03-04 15:08:57）与 `check_in_config` 引用 1 均未变 ✅；**`CHECKSUM TABLE` 586424728/2521898468/2554906448/680483255 与基线完全一致** ✅；产物 `artifacts/test_web_s5c/api/` 7 文件 ✅；8080 PID 31708 + HTTP 200、88 PID 35760、mvn 0 ✅；副作用 sys_* 记录备查、不计违规。 |
+| **DQ-20261125-0009** | web-tester | 浏览器自动化（无头 Edge）+ 8080 只读 + MySQL 写（`zzyl.nursing_level`，仅 `ZZT5C-*` ≤3 行） | Sprint 5c 护理等级 **W2 UI 浏览器验收**（A12：登录→服务管理/护理等级 3 行 8 列含「执行护理计划」、搜索、500px 弹窗 5 字段+计划下拉 3 项+5 项校验、新增、修改回填、启停、删除；计划页 count 联动 1→2→1；护理项目/护理计划/房型/用户回归 + 截图） | 2026-11-25 22:33 | 2026-11-25 22:34 | **2026-11-25 22:49** | **2026-11-25 22:36** | **已释放（完成，提前释放，UI 36/36 PASS）** | 按 lead 授权 W1 释放后队列 0 → **立即续批（段间优先，不打断 tester）**。资源基线：浏览器自动化 **0**（msedgedriver 0；msedge 常规 27 个属主人/DSH，非自动化）、8080 PID 31708 **只读**、MySQL 写空闲；基线三表 **3/3/6** + `check_in_config=1`；`CHECKSUM` 586424728 / 2521898468 / 2554906448 / 680483255。要求：仅 `ZZT5C-*` ≤3 行、结束清理回 **3/3/6**、种子 76/77/78 只读；**不重启、不动 8080 PID 31708 / 88 PID 35760**；结束清理无头 Edge/驱动进程并回填影响行数 + 截图产物；Redis 只读 `GET captcha_codes` 沿用同意。**申报实际影响**：`nursing_level` INSERT 1 / UPDATE 3 / DELETE 1，净增 0；plan/project_plan/check_in_config **0 变更**。**web-control 独立核验（22:36，只读）**：`nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6` / `check_in_config=1` ✅；`ZZT5C` 残留 **0** ✅；种子 76/77/78 字段与 update_time 全部未变（76→2026-04-13 22:26:12、77→2026-03-04 15:08:57、78→2025-06-09 21:03:09）✅；**`CHECKSUM TABLE` 586424728 / 2521898468 / 2554906448 / 680483255 与基线完全一致** ✅；UI 产物 `artifacts/test_web_s5c/ui/` **30 文件含 28 张截图** ✅；浏览器残留 **msedgedriver 0 / headless Edge 0 / 自动化 node 0** ✅（备注：tester 报告 22:31 出现的 headless Edge 经查为 Edge 自带 `PlatformExperiencesHelper` 遥测进程 `--edge-upload-metrics`，**非自动化会话**，记录备查、不计违规）；8080 PID **31708** 未动 + HTTP 200、88 PID **35760**、mvn 0 ✅；Redis 只读 `GET captcha_codes` 1 次（22:34:21，只读不写不删，免申请）；副作用 sys_* 记录备查、不计违规。**W1+W2 合计 A1–A14 全过（API 45/45 + UI 36/36）**。 |
 
 ---
 
@@ -184,6 +197,13 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 | 2026-11-25 15:02–15:03 | web-tester **正式申请 W1**（Sprint 5b 护理计划验收 · API 层 A1–A15，10 分钟）：资源=**8080 稳定访问 + MySQL 写**（`ZZT5B-*` 行净增 0；**A8 例外**：种子 133 status 临时 1→0→1，整表单改/删应被拒，验后按开测前快照恢复 `status/update_time`）；不重启、不动 23192/35760；产物 `artifacts/test_web_s5b/api/`；Redis 只读预报备沿用。lead 同步发开测预告确认 arch review PASS。web-control 基线复核（15:02：8080 LISTEN PID 23192 + HTTP 200、MySQL 写空闲、队列 0；`nursing_plan=3` / `nursing_project_plan=6`；`CHECKSUM TABLE` 2521898468/2554906448；种子 133 快照 status=1/update_time=NULL）→ **批准 DQ-20261125-0005**，窗口 **15:03–15:13**（默认 10 分钟）；并告知 W2 释放后立即续批安排。 |
 | 2026-11-25 15:05–15:06 | web-tester **释放 DQ-20261125-0005**（完成，**API 48/48 PASS**，提前释放，实际窗口 15:03–15:05；产物 `artifacts/test_web_s5b/api/` 18 文件）。web-control 独立核验（15:06）：`nursing_plan=3` / `nursing_project_plan=6`、`ZZT5B` 残留 **0**、**种子 133 `status=1、update_time=NULL` 已恢复（与开测快照一致）**、`ORPHAN_PP=0`、**`CHECKSUM TABLE` 2521898468/2554906448 与基线完全一致**、8080 PID 23192 未动 + HTTP 200 → **W1 关闭（未超时）**。同时 tester **申请 W2**（浏览器无头 Edge + 8080 只读 + MySQL 写 ≤3 行，15 分钟，UI 验收+截图）→ 队列 0、浏览器自动化空闲 → **按 lead 段间优先授权立即批准 DQ-20261125-0006**，窗口 **15:06–15:21**。 |
 | 2026-11-25 15:17–15:18 | web-tester **释放 DQ-20261125-0006**（完成，**UI 36/36 PASS**，提前释放，实际窗口 15:06–15:17；UI 产物 `artifacts/test_web_s5b/ui/` **55 文件含 51 张截图**）。web-control 独立核验（15:18）：`nursing_plan=3` / `nursing_project_plan=6`、`ZZT5B` 残留 **0**、孤儿子表 **0**、**种子 133 未变（status=1/update_time=NULL）**、**`CHECKSUM TABLE` 2521898468/2554906448 与基线完全一致**、浏览器残留 **msedgedriver 0 / headless Edge 0 / 自动化 node 0**、8080 PID 23192 + HTTP 200 / 88 PID 35760 未变 → **W2 关闭（提前释放、未超时）**；**W1+W2 合计 A1–A15 全过（API 48/48 + UI 36/36）**。 |
+| 2026-11-25 22:25–22:26 | **第 3 时段（晚场）开工**：lead 宣布实现「护理等级」CRUD 后端（前端零改动），arch 任务单 → dev1 实现 → tester 验收。web-control 基线核查（22:25）：88→**35760**（不变）、8080→**31708**（**16:49:39 用户重启的新 IDEA 实例**）、3306→16152、6379→35808；MySQL `nursing_level=3`（ids 76/77/78 / plan_id 133/134/135 / fee 1500/2000/3000）、`nursing_plan=3`、`nursing_project_plan=6`，`CHECKSUM TABLE` **586424728 / 2521898468 / 2554906448**；浏览器自动化 0、mvn 0。22:26 发晚场调度公告。DQ 编号续 **DQ-20261125-0007** 起。 |
+| 2026-11-25 22:27–22:30 | dev1 **轻量报备（统一结束·编译 #4）**：晚场两轮 `mvn -DskipTests compile` 均 **BUILD SUCCESS**（第 1 轮 **35.7s**、第 2 轮 **35.5s**，10 模块全 SUCCESS，无编译错误）；第 2 轮为 arch 任务单 v0.2 补 2 处（XML `id` 过滤 + Service planId/description 校验）。web-control 核查：devtools 两次重启 **22:27:57 `Started in 11.813s`**、**22:29:29 `Started in 12.938s`**，8080 LISTEN + HTTP 200、**PID 31708 全程未动**、`sys-error` 无新增、mvn 0 → 编译报备闭环。 |
+| 2026-11-25 22:29–22:30 | dev1 **正式申请 MySQL 写窗口**（`nursing_level` 单表自测 8 分钟，含唯一名 / 非法 planId / 删除被引用 77 拒绝验证）。web-control 重核基线：`nursing_level=3`（76/77/78）、`nursing_plan=3`、`nursing_project_plan=6`、`ZZT5C` 残留 0、`CHECKSUM TABLE` 586424728/2521898468/2554906448；MySQL 写空闲、队列 0 → **批准 DQ-20261125-0007**，窗口 **22:30–22:40**（默认 10 分钟）。 |
+| 2026-11-25 22:30–22:31 | dev1 **释放 DQ-20261125-0007**（完成，提前释放，实际窗口 22:30:03–22:30:08）。web-control 独立核验：`nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6`、`ZZT5C` 残留 **0**、id=79 不存在、种子 76/77/78 未变、**`CHECKSUM TABLE` 586424728/2521898468/2554906448 与基线完全一致**、8080 PID 31708 + HTTP 200 / 88 PID 35760 未变 → **DQ-0007 关闭（未超时）**；副作用 sys_* 记录备查。 |
+| 2026-11-25 22:31–22:32 | web-tester **正式申请 W1**（Sprint 5c 护理等级验收 · API 层 A1–A14，10 分钟）：资源=**8080 稳定访问 + MySQL 写**（`ZZT5C-*` 行净增 0；**A10 尝试 DELETE 种子 77 预期被拒**，执行前快照落盘、误删则按快照恢复并记 P1）；`nursing_plan`/`nursing_project_plan`/`check_in_config` 只读；不重启、**不动 8080 PID 31708 / 88 PID 35760**；产物 `artifacts/test_web_s5c/api/`；Redis 只读预报备沿用。lead 同步开测预告（review PASS + 基线 `check_in_config=1`）。web-control 基线复核（22:31）：8080 LISTEN PID 31708 + HTTP 200、MySQL 写空闲、队列 0；`nursing_level=3`（76/77/78）/`nursing_plan=3`/`nursing_project_plan=6`/`check_in_config=1`（引用 77）；种子 77 快照 + `CHECKSUM TABLE` **586424728 / 2521898468 / 2554906448 / 680483255** → **批准 DQ-20261125-0008**，窗口 **22:32–22:42**。 |
+| 2026-11-25 22:33–22:34 | web-tester **释放 DQ-20261125-0008**（完成，**API 45/45 PASS**，提前释放，实际窗口 22:32–22:33；产物 `artifacts/test_web_s5c/api/` 7 文件）。web-control 独立核验（22:34）：`nursing_level=3` / `nursing_plan=3` / `nursing_project_plan=6` / `check_in_config=1`；`ZZT5C` 残留 **0**；种子 76/77/78 与 `check_in_config` 引用均未变；**`CHECKSUM TABLE` 586424728/2521898468/2554906448/680483255 与基线完全一致**；8080 PID 31708 + HTTP 200 / 88 PID 35760 / mvn 0 → **W1 关闭（未超时）**；备注：实际 INSERT 5 较申报 ≤4 多 1 行（ADD-04 负费用观察），已清理无残留，轻微超限记录备查、不计违规。同时 tester **申请 W2**（浏览器无头 Edge + 8080 只读 + MySQL 写 ≤3 行，15 分钟）→ 队列 0、浏览器自动化空闲 → **按 lead 段间优先授权立即批准 DQ-20261125-0009**，窗口 **22:34–22:49**。 |
+| 2026-11-25 22:35–22:36 | web-tester **释放 DQ-20261125-0009**（完成，**UI 36/36 PASS**，提前释放，实际窗口 22:34–22:36；UI 产物 `artifacts/test_web_s5c/ui/` **30 文件含 28 张截图**）。web-control 独立核验（22:36）：四表 `3/3/6/1`、`ZZT5C` 残留 **0**、种子 76/77/78 与 update_time 全未变、**`CHECKSUM TABLE` 586424728/2521898468/2554906448/680483255 与基线完全一致**、浏览器残留 **msedgedriver 0 / headless Edge 0 / 自动化 node 0**、8080 PID 31708 + HTTP 200 / 88 PID 35760 未变 → **W2 关闭（提前释放、未超时）**；**W1+W2 合计 A1–A14 全过（API 45/45 + UI 36/36）**；备注：22:31 headless Edge 经查为 Edge 遥测进程（PlatformExperiencesHelper），非自动化会话。 |
 
 ---
 
@@ -223,6 +243,18 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 - **违规**：**0**（V-01 系第 1 时段事件，本时段无新增）
 - **结论**：Sprint 5b Web 测试调度闭环；tester 报告与结论将同步 lead / web-arch。
 
+### 第 3 时段（2026-11-25 22:25–22:36 · Sprint 5c「护理等级」CRUD）
+
+- **任务**：护理等级 CRUD **后端**（前端零改动）；arch 任务单 → dev1 实现（编译 #4 两轮）→ review PASS（22:32）→ tester W1+W2 验收
+- **窗口统计**：DQ-20261125-0007（dev1 MySQL 写自测，批准 22:30–22:40，实际 **22:30:03–22:30:08**）、DQ-0008（tester W1 API，批准 22:32–22:42，实际 **22:32–22:33**）、DQ-0009（tester W2 UI，批准 22:34–22:49，实际 **22:34–22:36**）；**三段全部提前释放、无超时**；tester 段间优先续批未被打断
+- **成果**：dev1 自测（CRUD / 唯一名 / 非法 planId / 删除被引用 77 拒绝全过）；tester **API 45/45 PASS + UI 36/36 PASS（A1–A14 全过）**；产物 `artifacts/test_web_s5c/api/`（7 文件）、`artifacts/test_web_s5c/ui/`（**30 文件含 28 张截图**）
+- **数据核验（web-control 独立，每段结束）**：`nursing_level=3`（76/77/78）、`nursing_plan=3`、`nursing_project_plan=6`、`check_in_config=1`（引用 77）、`ZZT5C` 残留 **0**、种子与 update_time 未变、**`CHECKSUM TABLE` 586424728 / 2521898468 / 2554906448 / 680483255 全程与基线一致**
+- **资源核验**：8080 **用户 IDEA 实例 PID 31708** 全程未动（HTTP 200）、88 PID 35760 未变；浏览器自动化结束 **0 残留**（msedgedriver / headless Edge / 自动化 node 均 0）；RuoYi 1、mvn 0
+- **报备**：编译 #4 两轮轻量报备（35.7s / 35.5s；devtools 重启 22:27:57、22:29:29，PID 31708 未变、无新增 error）；Redis 只读 `GET captcha_codes` 1 次（22:34:21，W2）；`sys_logininfor`/`sys_oper_log` 自动新增（应用行为）
+- **备注（非违规）**：W1 实际 INSERT 5 较申报 ≤4 多 1 行（ADD-04 负费用观察用例，已清理无残留，记录备查、已提示下次按实际用例数申报）；22:31 headless Edge 经 tester 查明为 Edge 遥测进程 `PlatformExperiencesHelper`（`--edge-upload-metrics`，非自动化会话）
+- **违规**：**0**（V-01 系第 1 时段事件；本时段无新增）
+- **结论**：Sprint 5c Web 测试调度闭环；tester 报告与结论将同步 lead / web-arch。
+
 ---
 
 ## 八、文档变更记录
@@ -245,6 +277,12 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 | v1.13 | 2026-11-25 15:03 | arch review PASS；**批准 DQ-20261125-0005（tester W1：8080 稳定 + MySQL 写，15:03–15:13）**，基线 3/6 + CHECKSUM + **种子 133 快照**（A8 恢复核验用）；W2 续批安排已约定。 |
 | v1.14 | 2026-11-25 15:06 | **DQ-0005 W1 释放闭环**（API 48/48 PASS；独立核验 3/6、ZZT5B 残留 0、**种子 133 已恢复**、ORPHAN 0、CHECKSUM 与基线完全一致、8080 未动）；**批准 DQ-20261125-0006（tester W2：浏览器 + 8080 只读 + MySQL 写，15:06–15:21）**；状态/时间线同步。 |
 | v1.15 | 2026-11-25 15:18 | **DQ-0006 W2 释放闭环**（UI 36/36 PASS；独立核验 3/6、ZZT5B 0、ORPHAN 0、种子未变、CHECKSUM 与基线一致、浏览器 0 残留、8080/88 PID 未变）；新增 **第 2 时段测试摘要**（Sprint 5b：API 48/48 + UI 36/36，DQ-0004/0005/0006 全闭环，违规 0）；状态回到无占用、队列 0。 |
+| v1.16 | 2026-11-25 22:26 | **第 3 时段（晚场 · Sprint 5c 护理等级）开记**：新增 §3.10（任务/资源预期/22:25 基线核查/公告）；8080 已变更为**用户 16:49 重启的新 IDEA 实例 PID 31708**（88→35760 未变）；MySQL 基线 `nursing_level=3`/`nursing_plan=3`/`nursing_project_plan=6` + CHECKSUM **586424728/2521898468/2554906448**；DQ 编号续 DQ-20261125-0007 起。 |
+| v1.17 | 2026-11-25 22:30 | 编译 #4 两轮闭环（35.7s / 35.5s；devtools 重启 22:27:57、22:29:29，PID 31708 未变、无新增 error）；**批准 DQ-20261125-0007（dev1 MySQL 写 `nursing_level` 单表，22:30–22:40）**，基线 3/3/6 + CHECKSUM；状态/时间线同步。 |
+| v1.18 | 2026-11-25 22:31 | **DQ-0007 释放闭环**（完成，实际窗口 22:30:03–22:30:08）；独立核验 counts 3/3/6、`ZZT5C` 残留 0、id=79 无残留、种子未变、**CHECKSUM 与基线完全一致**、8080 PID 31708 未动 HTTP 200；状态回到无占用、队列 0。 |
+| v1.19 | 2026-11-25 22:32 | arch review PASS；**批准 DQ-20261125-0008（tester W1：8080 稳定 + MySQL 写 `nursing_level` 单表，22:32–22:42）**；基线 3/3/6 + `check_in_config=1` + **种子 77 快照** + CHECKSUM（含 check_in_config **680483255**）；W2 续批安排已约定。 |
+| v1.20 | 2026-11-25 22:34 | **DQ-0008 W1 释放闭环**（API 45/45 PASS；独立核验 3/3/6/cfg=1、ZZT5C 残留 0、种子与 check_in_config 未变、**CHECKSUM 全一致**、8080 PID 31708 未动）；备注 INSERT 5 较申报 ≤4 多 1 行（已清理、不计违规）；**批准 DQ-20261125-0009（tester W2：浏览器 + 8080 只读 + MySQL 写，22:34–22:49）**。 |
+| v1.21 | 2026-11-25 22:36 | **DQ-0009 W2 释放闭环**（UI 36/36 PASS；独立核验 3/3/6/1、ZZT5C 0、种子与 update_time 未变、**CHECKSUM 全一致**、浏览器 0 残留、8080/88 PID 未变）；新增 **第 3 时段测试摘要**（Sprint 5c：API 45/45 + UI 36/36，DQ-0007/0008/0009 全闭环，违规 0）；状态回到无占用、队列 0。 |
 
 ---
 
@@ -264,4 +302,14 @@ lead 已确认「就位简报」并**全部认可**，按规则 v1.0/v1.1 执行
 - lead 独立只读复核（15:18）全部通过：list total=3/count=1、搜索/分页/详情子表//all 实体数组、前端源码零改动、DB 3/6 行恢复且 CHECKSUM 与基线一致、8080/88 PID 未变。
 - **Sprint 5b 验收结论：✅ 通过，可交付**。详见 `docs/test/Web_Sprint5b_验收复核.md`。
 - 调度收工：DQ-20261125-0004（dev1 自测）/DQ-0005（tester W1 API 48/48）/DQ-0006（tester W2 UI 36/36）全部提前释放；违规 0；浏览器/驱动/MySQL 写残留 0。
+- 注：web-control 会话已在上报后转入待命；本条为 lead 收尾代记。
+
+---
+
+## 十五、第 3 时段 lead 最终验收记录（2026-11-25 22:38）
+
+- web-tester 终版报告 v1.0：88/88 PASS（静态 7 + API 45 + UI 36，0 FAIL、P1/P2=0），A1–A14 全满足，首轮失败均为脚本适配。
+- lead 独立只读复核（22:36）全部通过：list 3 行含 planName、搜索/详情//all 正确、前端零改动、四表 3/3/6/1 且 CHECKSUM 与基线一致、8080 PID 31708 / 88 PID 35760 未动。
+- **Sprint 5c 验收结论：✅ 通过，可交付**。详见 docs/test/Web_Sprint5c_验收复核.md。
+- 调度收工：DQ-20261125-0007（dev1 自测）/0008（tester W1 API 45/45）/0009（tester W2 UI 36/36）全部提前释放；违规 0；浏览器/MySQL 写残留 0。
 - 注：web-control 会话已在上报后转入待命；本条为 lead 收尾代记。

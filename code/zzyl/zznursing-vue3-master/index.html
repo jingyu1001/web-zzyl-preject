@@ -193,6 +193,30 @@
             opacity: 0.5;
         }
     </style>
+    <!-- Dify 聊天机器人嵌入（配置脚本必须在 embed.min.js 之前执行；token/baseUrl/id 保持原样） -->
+    <style>
+      #dify-chatbot-bubble-button {
+        background-color: #1C64F2 !important;
+      }
+      #dify-chatbot-bubble-window {
+        width: 24rem !important;
+        height: 40rem !important;
+      }
+    </style>
+    <script>
+     window.difyChatbotConfig = {
+      token: 'I4IygFsoVTPf3Roy',
+      baseUrl: 'http://192.168.100.128',
+      inputs: {},
+      systemVariables: {},
+      userVariables: {},
+     }
+    </script>
+    <script
+     src="http://192.168.100.128/embed.min.js"
+     id="I4IygFsoVTPf3Roy"
+     defer>
+    </script>
 </head>
 
 <body>
